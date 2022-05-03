@@ -1,12 +1,15 @@
 package ru.netology.web;
 
 import com.codeborne.selenide.SelenideElement;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selenide.$;
@@ -17,8 +20,8 @@ public class TestCardOrder {
     private WebDriver driver;
 
     @BeforeAll
-    static void setUpAll() {
-        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/driver/win/chromedriver.exe");
+    static void setupClass() {
+        WebDriverManager.chromedriver().setup();
     }
 
     @BeforeEach
@@ -27,7 +30,7 @@ public class TestCardOrder {
     }
 
     @AfterEach
-    public void close() {
+    void tearDown() {
         driver.quit();
         driver = null;
     }
